@@ -29,6 +29,12 @@ renv::restore()
 ```
 [renv tutorial](https://rstudio.github.io/renv/articles/renv.html)
 
+## Pre-processed data
+
+**./Data** folder
+
+data_prep.qs is the actual file containing the pre-processed simulated data that has been generated for this demo. 
+
 ## Model location
 
 **./ML** folder
