@@ -475,7 +475,7 @@ foreach::registerDoSEQ()
 tictoc::toc()
 
 #Uncomment next line to save the outcome
-qs::qsave(instance, here::here("Data", "htune_demo.qs"))
+qs::qsave(instance, here::here("ML", "htune_demo.qs"))
 
 ```
 
@@ -484,7 +484,7 @@ qs::qsave(instance, here::here("Data", "htune_demo.qs"))
 How did all the possible parameter combinations do?
 
 ```{r evalhyper}
-#instance <- qs::qread(here::here("Data", "htune_demo.qs"))
+#instance <- qs::qread(here::here("ML", "htune_demo.qs"))
 hyparams <- instance$search_space$ids()
 perf_data <- instance$archive$data
 
@@ -743,15 +743,12 @@ pdp_data <- purrr::map2(
     }
   } := feat_val1)
 
-#Uncomment next line to save the outcome
-#qs::qsave(pdp_data, here::here("Data", "trt_pdp_preds.qs"))
 ```
 
 Plot PDPs
 
 ```{r conti_pdps_plot, eval = TRUE}
 feat <- "bm02"
-#pdp_data <- qs::qread(here::here("Data", "hct_pdp_preds.qs"))
 feat_cat <- data_prep %>% dplyr::pull(!!feat) %>% class()
 
 #create rug for bm02

@@ -9,11 +9,11 @@ This Demo aims at providing basic introduction to ML with R. We used simulated d
 
 # Prerequisites
 
-All code was generated using Rstudio with R version 4.0.1.  Rendering the R Markdown document (.Rmd) file using this or newer versions in Rstudio should not be a problem
+All code was generated using Rstudio with R version 4.2.1.  Rendering the R Markdown document (.Rmd) file using this or newer versions in Rstudio should not be a problem
 
 # Open the project 
 
-From inside RStudio go to: "File-> Open Project" and select: path_to_ml_course/sdi_ml_course/sdi_ml_course.Rproj
+From inside RStudio go to: "File-> Open Project" and select: path_to_ml_course/effStat_course/effStat_course.Rproj
 
 This will open the project of the course
 
@@ -29,30 +29,35 @@ renv::restore()
 ```
 [renv tutorial](https://rstudio.github.io/renv/articles/renv.html)
 
-## Data location
+## Model location
 
-**./Data** folder
+**./ML** folder
 
-Demo_data_tte.qs is the actual file containing the simulated data. The other files were generated through knitting RMD and are used to save knitting time
+htune_demo.qs is the actual file containing the RF ML model that has been generated for the first demo. 
 
 ## Location of the .RMD file
 
-The script needed to run the package are in the following folder
+The script needed to run the first demo is:
 
-**./Demo**
 
--Demo_simulated_tte.Rmd, the actual .Rmd file
+-demo.Rmd, the actual .Rmd file
 
--Demo_simulated_tte.html the output fom rendering the .Rmd
+-demo.html the output fom rendering the .Rmd
 
 ## Rendering Output
+
 There are two ways to render an R Markdown document. If you are using RStudio, then the “Knit” button (Ctrl+Shift+K) will render the document.
 
 # Troubleshooting
 
-If any questions feel free to contact
+If any questions feel free to contact:
+
+
+- Sandra Gonzalez Maldonado: <sandra.gonzalez_maldonado@boehringer-ingelheim.com>
+
+- Eliana Garcia Cossio: <eliana.garciacossio@bayer.com>
 
 - Antigoni Elefsinioti: <antigoni.elefsinioti@bayer.com>
 
-- Eliana Garcia Cossio: <eliana.garciacossio@bayer.com>
+
   
