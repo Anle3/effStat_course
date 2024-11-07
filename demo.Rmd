@@ -29,8 +29,8 @@ We are splitting the demo in the following steps
 5. Hyperparameter tuning
 6. Final model training and performance evaluation
 7. Explainable AI
-7.1 VIMP (Variable Importance)
-7.2 Partial dependency plots (PDPs) 
+7.1. VIMP (Variable Importance)
+7.2. Partial dependency plots (PDPs) 
 
 
 
@@ -308,7 +308,7 @@ data_prep <- prep_data_train %>%
 
 #Uncomment next line to save the outcome
 qs::qsave(data_prep, here::here("Data", "data_prep.qs"))
-
+save(data_prep, file=here::here("Data", "data_prep.Rdata"))
 
 ```
 
