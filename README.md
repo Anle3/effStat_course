@@ -5,7 +5,7 @@
 
 ## Introduction
 
-This Demo aims at providing basic introduction to ML with R. We used simulated data that we generated internally. 
+This Demo aims at providing basic introduction to ML with R. We used simulated data. 
 
 # Prerequisites
 
