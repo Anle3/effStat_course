@@ -1,0 +1,24 @@
+"0","data_prep  %>%"
+"0","  skimr::skim()"
+"1","── Data Summary ────────────────────────
+"
+"1","                           Values    
+"
+"1","Name                       Piped data
+"
+"1","Number of rows             1975      
+"
+"1","Number of columns          24        
+"
+"1","_______________________              
+"
+"1","Column type frequency:               
+"
+"1","  factor                   2         
+"
+"1","  numeric                  22        
+"
+"1","________________________             
+"
+"1","Group variables            None      
+"

@@ -1,0 +1,4 @@
+"0","#The resolution is the number of distinct values to try per hyperparameter, "
+"0","#which means in our example the tuner will construct a 2x2x2 grid of 8 configurations "
+"0","#of equally spaced points between the specified upper and lower bounds"
+"0","tuner <- mlr3tuning::tnr(""grid_search"", resolution = 1)"

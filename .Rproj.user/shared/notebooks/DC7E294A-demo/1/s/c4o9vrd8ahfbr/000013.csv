@@ -1,0 +1,21 @@
+"1","INFO  [14:13:04.398] [bbotk]"
+"1","
+"
+"1","INFO  [14:13:04.403] [bbotk] Evaluating 1 configuration(s)"
+"1","
+"
+"1","INFO  [14:13:04.415] [mlr3] Running benchmark with 3 resampling iterations"
+"1","
+"
+"1","INFO  [14:13:14.593] [mlr3] Applying learner 'surv.ranger' on task 'surv_example' (iter 1/3)
+"
+"1","INFO  [14:13:42.305] [mlr3] Applying learner 'surv.ranger' on task 'surv_example' (iter 2/3)
+"
+"1","INFO  [14:14:14.488] [mlr3] Applying learner 'surv.ranger' on task 'surv_example' (iter 3/3)
+"
+"1","INFO  [14:14:15.753] [mlr3] Finished benchmark"
+"1","
+"
+"1","INFO  [14:14:15.798] [bbotk] Result of batch 3:"
+"1","
+"
