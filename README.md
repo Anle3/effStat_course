@@ -1,7 +1,7 @@
                                              
 <img src="readme.PNG" width="200" align="right" />
 
-# SDI ML course README
+# Machine Learning in clinical development README
 
 ## Introduction
 
