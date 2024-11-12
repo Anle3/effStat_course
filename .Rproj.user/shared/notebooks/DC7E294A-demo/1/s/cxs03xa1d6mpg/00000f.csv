@@ -1,3 +1,0 @@
-"0","library(GGally)"
-"0","# Explore Kaplan-Meier curve"
-"0","mlr3viz::autoplot(surv_task)"
