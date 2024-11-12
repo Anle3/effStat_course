@@ -1,0 +1,331 @@
+---
+title: "Machine Learning in clinical development \n "
+subtitle: "The what?, the why?, and (a bit of) the how?"
+date: "`r Sys.Date()`"
+author: Sandra Gonzalez Maldonado, Eliana Garcia Cossio, Antigoni Elefsinioti
+output:
+  rmdformats::downcute:
+    self_contained: true
+    thumbnails: false
+    lightbox: false
+    gallery: false
+    highlight: tango
+    number_sections: false
+    theme: spacelab
+    code_folding: hide
+---
+
+
+## Demo: Identification of predictive biomarkers with Virtual Twins
+
+
+In this demo we will go through the process of identifying biomarkers that can
+predict treatment effect heterogeneity by analyzing simulated survival data.
+
+### Disclaimer!:
+
+1. In this tutorial, we use the entire dataset for training! This is for illustration purposes only. It exemplifies a one step of simulation study. 
+** Remember to split your data and validate your findings in the test set! **
+2. No hyperparameter tuning is shown. (Hint: we could tune the number of trees, complexity parameters, etc.)
+
+### Back to business ;)
+
+The steps we will take are:
+
+0. Load the dataset simulated in the previous demo
+1. Virtual Twins Step 1a: Fit a RF to our data
+2. Virtual Twins Step 1b: Predict counterfactual outcomes based on the fitted RF for all subjects
+3. Virtual Twins Step 1c: Calculate the individual treatment effect (ITE)
+4. Virtual Twins Step 2:  Fit a classification and/or regression tree to the ITE
+6. Check whether the predictive biomarkers were correctly identified!
+
+
+
+```{r knitsetup, include=FALSE}
+library(tidyverse)
+
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, out.width = "100%")
+
+ggplot2::theme_set(theme_light() +
+                     theme(
+                       strip.background = element_rect(fill = "#00617F"),
+                       strip.text = element_text(colour = "#FFFFFF")
+                     )
+)
+```
+
+# 0. Load simulated data from the previous demo
+
+In the previous demo we simulated data with a right-censored survival outcome.
+
+$Surv(time,status) \sim 0.3*bm01+0.6*bm02+0.4*bm03+0.1*bm04-trt-1.5*trt*bm01$
+$-1.5*trt*bm05-1.5*trt*bm06 + noise(bm07...bm20)$
+
+Where:
+
+* Treatment effect
+$trt$
+
+* Main effects of the biomarkers
+$0.3*bm01+0.6*bm02+0.4*bm03+0.1*bm04$
+
+* Biomarker-treatment interactions
+$-1.5*trt*bm01-1.5*trt*bm05-1.5*trt*bm06$
+
+We must keep in mind that some variables were removed from the dataset during pre-processing due to their high correlation:
+
+* The variables bm01 and bm02 were highly correlated, so *bm01 was removed* and bm02 remained.
+
+* The variables bm05 and bm06 were also highly correlated, so *bm06 was removed* and bm05 remained.
+
+```{r import_packages}
+#load utility packages
+library(tidyverse)
+library(here)
+library(tidymodels)
+library(randomForestSRC)
+library(randomForest)
+library(gridExtra) 
+```
+
+
+
+```{r load simulated data}
+
+# 0. Loading the dataset simulated in the previous demo
+load("C:/Users/gonsandr/OneDrive - Boehringer Ingelheim/Documents/TMCP stats advisor/The effective statistician workshop/Data/data_prep.Rdata")
+
+data_prep <- as.data.frame(data_prep)
+names(data_prep) <- c("id_number", names(data_prep[2:13]), "trt", "time", "status")
+
+data_prep_train <- data_prep[!is.na(data_prep$id_number),]
+data_prep_test  <- data_prep[is.na(data_prep$id_number),]
+
+bm_names <- grep("bm", names(data_prep), value = T)
+
+```
+
+
+# VT Step 1a. Estimate individual treatment effect via Random Forest
+
+In the original paper in which Virtual Twins was introduced (Foster et al., 2011)
+... the authors mention that learning a function for the outcome of interest
+can be done by either applying RF to the entire dataset (treatment and control together), 
+or, alternatively, the function for the treated and control group can be learnt separately. 
+
+In a separate paper (Zhao et al, 2022; https://www.mdpi.com/1099-4300/24/7/975), 
+the authors mention that the second option might be better: 
+
+> "Representation learning methods deal with the counterfactual problem,
+which divides the historical data of all the patients into two parts, one with data from
+for patients who have received treatment 𝑇=1 and another one for the control group 𝑇=0.
+In representation learning methods, instead of learning from the entire dataset, 
+which encounters the counterfactual problem, the functions are learned separately, 
+and for a new patient, the ITE can be predicted by as the difference in predicted outcomes
+between the treated and the control group."
+
+```{r step_1_RF}
+
+ set.seed(123)
+   
+  data_trt0 <- base::subset(data_prep, trt == "control")
+  data_trt1 <- base::subset(data_prep, trt == "active")
+  
+# 2. Fit a RF to our data  
+   # Fitting two RandomForest models
+  
+  rf_model_trt0 <- randomForestSRC::rfsrc(Surv(time, status) ~ .,
+                                          data = data_trt0[,c("time", "status", bm_names)],
+                                          nsplit = 0,
+                                          ntree = 1000, importance = T)
+  
+ 
+  
+  rf_model_trt1 <- randomForestSRC::rfsrc(Surv(time, status) ~ ., 
+                                          data = data_trt1[,c("time", "status", bm_names)],
+                                          nsplit = 0,
+                                          ntree = 1000, importance = T )
+  
+
+
+```    
+Show the variable importance from the two RF fits: 
+
+Variable importance from the RF fitted on data from the control group:
+
+```{r, VIMP_control}
+
+print(round(sort(randomForestSRC::vimp(rf_model_trt0)$importance, T), 2))
+  randomForestSRC::plot.rfsrc(rf_model_trt0, 
+                              main = "Error rate and variable importance - control group")
+  
+```
+
+Variable importance from the RF fitted on data from the active treatment group:
+
+```{r, VIMP_active_trt}
+  print(randomForestSRC::vimp(rf_model_trt1)$importance)
+  randomForestSRC::plot.rfsrc(rf_model_trt1, , 
+                              main = "Error rate and variable importance - active treatment group")
+```
+
+# VT Step 1b. Predict the outcome for all subjects with T=0 and T=1  
+
+For a survival outcome, we are interested in predicting survival times. 
+
+As described in Jared et al. 2010, if a Random Forest is fit to the entire dataset: 
+
+> If the actual treatment group for subject i is j , then the outcome is
+obtained from the out-of-bag estimate from the Random Forest, whereas 
+the outcome for subjects in other treatment groups is obtained by applying
+the random forest to that person’s data, with the treatment group switched.
+
+Alternatively, if two Random Forest models are fit separately for each treatment group: 
+
+> A variation of this step would be to use two separate random forests, one for each treatment group, and predict for each subject using the forest from the other group.
+
+From the output of predict.rfsrc, we can extract:
+
+* *chf*: the cumulative hazard function
+
+* *survival*: the survival function
+
+* *time.interest*: ordered unique death times
+
+* *predicted*: ... this one is a bit tricky. One would expect these to be the estimated survival times. Instead, it contains mortality estimates, defined by the authors of the package as: 
+
+> For survival, the prediction is *mortality* defined as the sum of the CHF over the event (death) times. This value represents estimated risk for each individual calibrated to the scale of the number of events. Thus as a specific example, if case $i$ has a mortality value of 100, then if all individuals had the same covariate as $i$, which is $X=x_i$, we would expect an average of 100 events. 
+
+To obtain estimated survival times, we need an intermediate step:
+
+```{r estimated_surv_times}
+
+# Sorted unique event times from the control and active treatment groups
+times_0  <- randomForestSRC::predict.rfsrc(rf_model_trt0, data_prep)$time.interest
+times_1  <- randomForestSRC::predict.rfsrc(rf_model_trt1, data_prep)$time.interest
+
+# Estimated survival curves for the control and active treatment groups
+
+Shat_0  <- randomForestSRC::predict.rfsrc(rf_model_trt0, data_prep)$survival
+Shat_1  <- randomForestSRC::predict.rfsrc(rf_model_trt1, data_prep)$survival
+
+expected_survival_time <- function(S.hat, unique_times) {
+  grid.diff <- diff(c(0, unique_times, max(unique_times)))
+
+  c(cbind(1, S.hat) %*% grid.diff)
+}
+
+```
+
+
+```{r predict_from_RF}
+
+  twin0 <- expected_survival_time(Shat_0, times_0)
+  twin1 <- expected_survival_time(Shat_1, times_1)
+  
+```
+
+
+# VT Step 1c. Calculate the individual treatment effect
+
+The individual treatment effect is defined as the difference in predicted survival times.
+
+```{r ITE}
+
+  # Individual treatment effect 
+  z <- twin1 - twin0
+
+```
+
+Add estimates to the data
+```{r, data_bind}
+
+  data_with_z <- cbind(data_prep, surv_time_control = twin0, surv_time_active = twin1, ITE = z)
+
+```
+
+
+# VT Step 2. Fit a classification and/or a regression tree to the individual treatment effect
+
+## Classification tree
+
+We define a new variable $Z^{*}$, $Z^{*}_i=1$ if $Z_i > c$ and $Z^{*}_i=0$ otherwise,
+where $c$ is a value for which the difference in treatment effect is considered meaningful.
+For example, it could be one of the quantiles of $Z$.
+
+```{r quantiles_of_z}
+
+(median_z <- quantile(z)["50%"])
+q_75_z   <- quantile(z)["75%"]
+
+
+data_with_z$Z_cat_med <- ifelse(data_with_z$ITE > median_z, "1", "0")
+data_with_z$Z_cat_q75 <- ifelse(data_with_z$ITE > q_75_z, "1", "0")
+
+```
+
+The value of $c$ that we use from now on is the median of $Z$, that is $c= 2.47891$ years.
+
+We use the function `rpart::rpart()` with the method = "class"
+
+```{r classification}
+
+tree.class <- rpart::rpart(Z_cat_med ~ ., data= data_with_z[,c("Z_cat_med", bm_names)], 
+                    method= "class",
+                    maxdepth = 3,
+                    cp=0,
+                    maxcompete = 2) 
+
+print(tree.class)
+
+library(rpart.plot)
+rpart.plot::rpart.plot(tree.class,
+                       type = 1, 
+                       extra = 1)
+```
+
+
+## Regression tree
+
+Alternatively, we can fit a regression tree to $Z$. 
+
+```{r regression}
+
+tree.cont <- rpart::rpart(ITE ~ ., data= data_with_z[,c("ITE", bm_names)], 
+                    maxdepth = 3,
+                    cp=0,
+                    maxcompete = 2) 
+
+print(tree.cont)
+
+library(rpart.plot)
+rpart.plot::rpart.plot(tree.cont,
+                       type = 1, 
+                       extra = 1)
+
+```
+
+# 6. Check whether the predictive biomarkers were correctly identified
+
+As we see, in both the classification and regression trees, the splits were made based on the biomarkers that we know to be treatment-effect modifiers: *bm02 (correlated with bm01)* and *bm05 (correlated with bm06)*.
+
+Note: In the reference papers, no ensemble methods are recommended for the second step.
+However, in theory a Random Forest or any other ensemble method could also be used for the final identification of predictive biomarkers. 
+But remember, this might come at a cost in terms of interpretability.
+
+P.S. Measures for the evaluation of the performance of VT for this task, are mentioned in the reference papers below. Happy reading!
+
+## Thank you for your participation!
+
+# References
+
+- [Foster et al., 2011](https://pubmed.ncbi.nlm.nih.gov/21815180/)
+- [Lu et al., 2018](https://pubmed.ncbi.nlm.nih.gov/29706752/)
+- [Zhao et al., 2022](https://www.mdpi.com/1099-4300/24/7/975)
+- [Deng et al., 2023](https://pubmed.ncbi.nlm.nih.gov/36876989/)
+
+
+
+***
+
+
