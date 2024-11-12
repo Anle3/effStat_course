@@ -7,7 +7,7 @@
 
         <meta name="author" content="Eliana Garcia Cossio, Antigoni Elefsinioti, Sandra Gonzalez Maldonado" />
     
-        <meta name="date" content="2024-11-11" />
+        <meta name="date" content="2024-11-12" />
     
     <title>Machine Learning in clinical development</title>
 
@@ -4800,7 +4800,7 @@ how?</h1>
            <span class="glyphicon glyphicon-user"></span> Eliana Garcia
 Cossio, Antigoni Elefsinioti, Sandra Gonzalez Maldonado
       </p>
-         <p class="date"><span class="glyphicon glyphicon-calendar"></span> 2024-11-11</p>
+         <p class="date"><span class="glyphicon glyphicon-calendar"></span> 2024-11-12</p>
            
 
    
@@ -6004,197 +6004,100 @@ doRNG::registerDoRNG(seed = 123)
 
 
 tuner$optimize(instance)</code></pre>
-<<<<<<< HEAD:demo_ML_survivalRF.html
-<pre><code>## INFO  [17:08:24.756] [bbotk] Starting to optimize 3 parameter(s) with &#39;&lt;OptimizerBatchGridSearch&gt;&#39; and &#39;&lt;TerminatorNone&gt;&#39;
-## INFO  [17:08:24.814] [bbotk] Evaluating 1 configuration(s)
-## INFO  [17:08:24.889] [mlr3] Running benchmark with 3 resampling iterations
-## INFO  [17:08:29.527] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
-## INFO  [17:08:47.942] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
-## INFO  [17:09:08.518] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
-## INFO  [17:11:15.645] [mlr3] Finished benchmark
-## INFO  [17:11:15.913] [bbotk] Result of batch 1:
-## INFO  [17:11:15.917] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
-## INFO  [17:11:15.917] [bbotk]       1000   11            40   0.7579412        0      0          376.459
-## INFO  [17:11:15.917] [bbotk]                                 uhash
-## INFO  [17:11:15.917] [bbotk]  f2c24b6e-92c2-44b8-9162-dcdde54d1828
-## INFO  [17:11:15.920] [bbotk] Evaluating 1 configuration(s)
-## INFO  [17:11:15.931] [mlr3] Running benchmark with 3 resampling iterations
-## INFO  [17:11:20.135] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
-## INFO  [17:11:30.662] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
-## INFO  [17:11:48.062] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
-## INFO  [17:12:24.841] [mlr3] Finished benchmark
-## INFO  [17:12:24.885] [bbotk] Result of batch 2:
-## INFO  [17:12:24.888] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
-## INFO  [17:12:24.888] [bbotk]       1000    1             2    0.701391        0      0          111.013
-## INFO  [17:12:24.888] [bbotk]                                 uhash
-## INFO  [17:12:24.888] [bbotk]  460080a1-e586-46a7-9e09-8e9bb6ef79ed
-## INFO  [17:12:24.892] [bbotk] Evaluating 1 configuration(s)
-## INFO  [17:12:24.903] [mlr3] Running benchmark with 3 resampling iterations
-## INFO  [17:12:30.021] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
-## INFO  [17:12:43.403] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
-## INFO  [17:13:02.820] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
-## INFO  [17:14:13.004] [mlr3] Finished benchmark
-## INFO  [17:14:13.051] [bbotk] Result of batch 3:
-## INFO  [17:14:13.054] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
-## INFO  [17:14:13.054] [bbotk]        500   11             2   0.7540331        0      0          207.479
-## INFO  [17:14:13.054] [bbotk]                                 uhash
-## INFO  [17:14:13.054] [bbotk]  c427136e-6512-48ed-a4bd-df5cde6060b9
-## INFO  [17:14:13.057] [bbotk] Evaluating 1 configuration(s)
-## INFO  [17:14:13.068] [mlr3] Running benchmark with 3 resampling iterations
-## INFO  [17:14:18.660] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
-## INFO  [17:14:27.836] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
-## INFO  [17:14:39.873] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
-## INFO  [17:15:11.797] [mlr3] Finished benchmark
-## INFO  [17:15:11.859] [bbotk] Result of batch 4:
-## INFO  [17:15:11.862] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
-## INFO  [17:15:11.862] [bbotk]       1000    1            40   0.6950831        0      0           95.531
-## INFO  [17:15:11.862] [bbotk]                                 uhash
-## INFO  [17:15:11.862] [bbotk]  a2fba919-12c4-478d-9574-9b21eb9ad66c
-## INFO  [17:15:11.866] [bbotk] Evaluating 1 configuration(s)
-## INFO  [17:15:11.876] [mlr3] Running benchmark with 3 resampling iterations
-## INFO  [17:15:15.672] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
-## INFO  [17:15:24.471] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
-## INFO  [17:15:35.743] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
-## INFO  [17:17:56.369] [mlr3] Finished benchmark
-## INFO  [17:17:56.412] [bbotk] Result of batch 5:
-## INFO  [17:17:56.415] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
-## INFO  [17:17:56.415] [bbotk]       1000   11             2   0.7549846        0      0          417.855
-## INFO  [17:17:56.415] [bbotk]                                 uhash
-## INFO  [17:17:56.415] [bbotk]  777d1c19-31fa-4d94-89fe-f378022f1c4b
-## INFO  [17:17:56.418] [bbotk] Evaluating 1 configuration(s)
-## INFO  [17:17:56.429] [mlr3] Running benchmark with 3 resampling iterations
-## INFO  [17:18:00.401] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
-## INFO  [17:18:10.780] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
-## INFO  [17:18:25.420] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
-## INFO  [17:19:26.398] [mlr3] Finished benchmark
-## INFO  [17:19:26.442] [bbotk] Result of batch 6:
-## INFO  [17:19:26.446] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
-## INFO  [17:19:26.446] [bbotk]        500   11            40    0.758176        0      0           186.62
-## INFO  [17:19:26.446] [bbotk]                                 uhash
-## INFO  [17:19:26.446] [bbotk]  149618cf-0fc8-448e-ad87-a2e5f730e70e
-## INFO  [17:19:26.449] [bbotk] Evaluating 1 configuration(s)
-## INFO  [17:19:26.460] [mlr3] Running benchmark with 3 resampling iterations
-## INFO  [17:19:30.896] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
-## INFO  [17:19:42.875] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
-## INFO  [17:19:57.936] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
-## INFO  [17:20:14.617] [mlr3] Finished benchmark
-## INFO  [17:20:14.662] [bbotk] Result of batch 7:
-## INFO  [17:20:14.666] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
-## INFO  [17:20:14.666] [bbotk]        500    1             2   0.7019438        0      0           50.355
-## INFO  [17:20:14.666] [bbotk]                                 uhash
-## INFO  [17:20:14.666] [bbotk]  069c2089-60e9-4ee9-bba4-77514fdfde67
-## INFO  [17:20:14.669] [bbotk] Evaluating 1 configuration(s)
-## INFO  [17:20:14.680] [mlr3] Running benchmark with 3 resampling iterations
-## INFO  [17:20:19.600] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
-## INFO  [17:20:34.135] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
-## INFO  [17:20:52.714] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
-## INFO  [17:21:08.755] [mlr3] Finished benchmark
-## INFO  [17:21:08.802] [bbotk] Result of batch 8:
-## INFO  [17:21:08.805] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
-## INFO  [17:21:08.805] [bbotk]        500    1            40   0.6946753        0      0           47.286
-## INFO  [17:21:08.805] [bbotk]                                 uhash
-## INFO  [17:21:08.805] [bbotk]  b4edf8dd-ea48-4bb0-b977-2c7e798b5046
-## INFO  [17:21:08.825] [bbotk] Finished optimizing after 8 evaluation(s)
-## INFO  [17:21:08.826] [bbotk] Result:
-## INFO  [17:21:08.828] [bbotk]  num.trees  mtry min.node.size learner_param_vals  x_domain surv.cindex
-## INFO  [17:21:08.828] [bbotk]      &lt;int&gt; &lt;int&gt;         &lt;int&gt;             &lt;list&gt;    &lt;list&gt;       &lt;num&gt;
-## INFO  [17:21:08.828] [bbotk]        500    11            40          &lt;list[7]&gt; &lt;list[3]&gt;    0.758176</code></pre>
-=======
-<pre><code>## INFO  [16:01:35.875] [bbotk] Starting to optimize 3 parameter(s) with &#39;&lt;OptimizerBatchGridSearch&gt;&#39; and &#39;&lt;TerminatorNone&gt;&#39;
-## INFO  [16:01:35.932] [bbotk] Evaluating 1 configuration(s)
-## INFO  [16:01:36.007] [mlr3] Running benchmark with 3 resampling iterations
-## INFO  [16:01:40.532] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
-## INFO  [16:01:58.101] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
-## INFO  [16:02:17.921] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
-## INFO  [16:04:25.678] [mlr3] Finished benchmark
-## INFO  [16:04:25.960] [bbotk] Result of batch 1:
-## INFO  [16:04:25.963] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
-## INFO  [16:04:25.963] [bbotk]       1000   11            40   0.7579412        0      0          378.408
-## INFO  [16:04:25.963] [bbotk]                                 uhash
-## INFO  [16:04:25.963] [bbotk]  76745f48-eda3-4cc6-974b-0310afad6899
-## INFO  [16:04:25.967] [bbotk] Evaluating 1 configuration(s)
-## INFO  [16:04:25.978] [mlr3] Running benchmark with 3 resampling iterations
-## INFO  [16:04:30.805] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
-## INFO  [16:04:41.444] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
-## INFO  [16:04:57.550] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
-## INFO  [16:05:34.044] [mlr3] Finished benchmark
-## INFO  [16:05:34.089] [bbotk] Result of batch 2:
-## INFO  [16:05:34.092] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
-## INFO  [16:05:34.092] [bbotk]       1000    1             2    0.701391        0      0           107.31
-## INFO  [16:05:34.092] [bbotk]                                 uhash
-## INFO  [16:05:34.092] [bbotk]  7659d1b1-32f1-449a-8271-0d48d16d4efa
-## INFO  [16:05:34.096] [bbotk] Evaluating 1 configuration(s)
-## INFO  [16:05:34.107] [mlr3] Running benchmark with 3 resampling iterations
-## INFO  [16:05:38.828] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
-## INFO  [16:05:52.252] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
-## INFO  [16:06:11.142] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
-## INFO  [16:07:20.986] [mlr3] Finished benchmark
-## INFO  [16:07:21.032] [bbotk] Result of batch 3:
-## INFO  [16:07:21.035] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
-## INFO  [16:07:21.035] [bbotk]        500   11             2   0.7540331        0      0          206.613
-## INFO  [16:07:21.035] [bbotk]                                 uhash
-## INFO  [16:07:21.035] [bbotk]  e44d6e22-b15c-43a5-8e28-7781ed1130b9
-## INFO  [16:07:21.038] [bbotk] Evaluating 1 configuration(s)
-## INFO  [16:07:21.049] [mlr3] Running benchmark with 3 resampling iterations
-## INFO  [16:07:26.128] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
-## INFO  [16:07:42.231] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
-## INFO  [16:08:02.883] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
-## INFO  [16:08:32.490] [mlr3] Finished benchmark
-## INFO  [16:08:32.556] [bbotk] Result of batch 4:
-## INFO  [16:08:32.560] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
-## INFO  [16:08:32.560] [bbotk]       1000    1            40   0.6950831        0      0           93.496
-## INFO  [16:08:32.560] [bbotk]                                 uhash
-## INFO  [16:08:32.560] [bbotk]  480825a8-0348-460d-9559-50abbec19f34
-## INFO  [16:08:32.565] [bbotk] Evaluating 1 configuration(s)
-## INFO  [16:08:32.579] [mlr3] Running benchmark with 3 resampling iterations
-## INFO  [16:08:38.066] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
-## INFO  [16:08:55.692] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
-## INFO  [16:09:18.225] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
-## INFO  [16:11:38.275] [mlr3] Finished benchmark
-## INFO  [16:11:38.322] [bbotk] Result of batch 5:
-## INFO  [16:11:38.325] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
-## INFO  [16:11:38.325] [bbotk]       1000   11             2   0.7549846        0      0          415.218
-## INFO  [16:11:38.325] [bbotk]                                 uhash
-## INFO  [16:11:38.325] [bbotk]  9912e022-d26d-47dd-8268-7c4c0b2343ff
-## INFO  [16:11:38.329] [bbotk] Evaluating 1 configuration(s)
-## INFO  [16:11:38.340] [mlr3] Running benchmark with 3 resampling iterations
-## INFO  [16:11:42.833] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
-## INFO  [16:11:52.220] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
-## INFO  [16:12:04.122] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
-## INFO  [16:13:03.925] [mlr3] Finished benchmark
-## INFO  [16:13:03.969] [bbotk] Result of batch 6:
-## INFO  [16:13:03.972] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
-## INFO  [16:13:03.972] [bbotk]        500   11            40    0.758176        0      0           185.54
-## INFO  [16:13:03.972] [bbotk]                                 uhash
-## INFO  [16:13:03.972] [bbotk]  4de8c140-58b2-4ef8-b03d-d1eaabe15884
-## INFO  [16:13:03.975] [bbotk] Evaluating 1 configuration(s)
-## INFO  [16:13:03.986] [mlr3] Running benchmark with 3 resampling iterations
-## INFO  [16:13:07.895] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
-## INFO  [16:13:17.654] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
-## INFO  [16:13:29.101] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
-## INFO  [16:13:45.720] [mlr3] Finished benchmark
-## INFO  [16:13:45.765] [bbotk] Result of batch 7:
-## INFO  [16:13:45.768] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
-## INFO  [16:13:45.768] [bbotk]        500    1             2   0.7019438        0      0           49.987
-## INFO  [16:13:45.768] [bbotk]                                 uhash
-## INFO  [16:13:45.768] [bbotk]  6bcb05a1-fcb9-49a8-b5f3-5bb0fed033c4
-## INFO  [16:13:45.771] [bbotk] Evaluating 1 configuration(s)
-## INFO  [16:13:45.782] [mlr3] Running benchmark with 3 resampling iterations
-## INFO  [16:13:49.717] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
-## INFO  [16:14:00.331] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
-## INFO  [16:14:13.531] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
-## INFO  [16:14:29.424] [mlr3] Finished benchmark
-## INFO  [16:14:29.471] [bbotk] Result of batch 8:
-## INFO  [16:14:29.474] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
-## INFO  [16:14:29.474] [bbotk]        500    1            40   0.6946753        0      0           47.389
-## INFO  [16:14:29.474] [bbotk]                                 uhash
-## INFO  [16:14:29.474] [bbotk]  e7927809-720f-49b8-bc59-50a46674c719
-## INFO  [16:14:29.494] [bbotk] Finished optimizing after 8 evaluation(s)
-## INFO  [16:14:29.495] [bbotk] Result:
-## INFO  [16:14:29.498] [bbotk]  num.trees  mtry min.node.size learner_param_vals  x_domain surv.cindex
-## INFO  [16:14:29.498] [bbotk]      &lt;int&gt; &lt;int&gt;         &lt;int&gt;             &lt;list&gt;    &lt;list&gt;       &lt;num&gt;
-## INFO  [16:14:29.498] [bbotk]        500    11            40          &lt;list[7]&gt; &lt;list[3]&gt;    0.758176</code></pre>
->>>>>>> 70bd36760b09e2b951b8ea987dfdfdf38d47ebe3:demo.html
+<pre><code>## INFO  [06:59:59.888] [bbotk] Starting to optimize 3 parameter(s) with &#39;&lt;OptimizerBatchGridSearch&gt;&#39; and &#39;&lt;TerminatorNone&gt;&#39;
+## INFO  [06:59:59.947] [bbotk] Evaluating 1 configuration(s)
+## INFO  [07:00:00.024] [mlr3] Running benchmark with 3 resampling iterations
+## INFO  [07:00:04.581] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
+## INFO  [07:00:23.348] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
+## INFO  [07:00:45.423] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
+## INFO  [07:02:50.794] [mlr3] Finished benchmark
+## INFO  [07:02:51.073] [bbotk] Result of batch 1:
+## INFO  [07:02:51.076] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
+## INFO  [07:02:51.076] [bbotk]       1000   11            40   0.7579412        0      0          373.448
+## INFO  [07:02:51.076] [bbotk]                                 uhash
+## INFO  [07:02:51.076] [bbotk]  9c9d7369-af3b-4f26-8728-0f1697fb0915
+## INFO  [07:02:51.080] [bbotk] Evaluating 1 configuration(s)
+## INFO  [07:02:51.091] [mlr3] Running benchmark with 3 resampling iterations
+## INFO  [07:02:55.862] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
+## INFO  [07:03:09.287] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
+## INFO  [07:03:25.013] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
+## INFO  [07:04:01.694] [mlr3] Finished benchmark
+## INFO  [07:04:01.739] [bbotk] Result of batch 2:
+## INFO  [07:04:01.742] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
+## INFO  [07:04:01.742] [bbotk]       1000    1             2    0.701391        0      0          108.818
+## INFO  [07:04:01.742] [bbotk]                                 uhash
+## INFO  [07:04:01.742] [bbotk]  825649a9-550b-480d-a65c-cfa5237d1a1e
+## INFO  [07:04:01.745] [bbotk] Evaluating 1 configuration(s)
+## INFO  [07:04:01.756] [mlr3] Running benchmark with 3 resampling iterations
+## INFO  [07:04:07.457] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
+## INFO  [07:04:22.301] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
+## INFO  [07:04:41.056] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
+## INFO  [07:05:50.921] [mlr3] Finished benchmark
+## INFO  [07:05:50.968] [bbotk] Result of batch 3:
+## INFO  [07:05:50.971] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
+## INFO  [07:05:50.971] [bbotk]        500   11             2   0.7540331        0      0          207.635
+## INFO  [07:05:50.971] [bbotk]                                 uhash
+## INFO  [07:05:50.971] [bbotk]  dade39d8-f2eb-44b7-84da-d6eb998de901
+## INFO  [07:05:50.974] [bbotk] Evaluating 1 configuration(s)
+## INFO  [07:05:50.986] [mlr3] Running benchmark with 3 resampling iterations
+## INFO  [07:05:57.347] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
+## INFO  [07:06:13.405] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
+## INFO  [07:06:34.963] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
+## INFO  [07:07:06.004] [mlr3] Finished benchmark
+## INFO  [07:07:06.049] [bbotk] Result of batch 4:
+## INFO  [07:07:06.052] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
+## INFO  [07:07:06.052] [bbotk]       1000    1            40   0.6950831        0      0           96.362
+## INFO  [07:07:06.052] [bbotk]                                 uhash
+## INFO  [07:07:06.052] [bbotk]  d3f21f90-07ca-4a5b-8b3a-2cc68b95ca51
+## INFO  [07:07:06.055] [bbotk] Evaluating 1 configuration(s)
+## INFO  [07:07:06.083] [mlr3] Running benchmark with 3 resampling iterations
+## INFO  [07:07:11.930] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
+## INFO  [07:07:22.096] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
+## INFO  [07:07:34.532] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
+## INFO  [07:09:56.318] [mlr3] Finished benchmark
+## INFO  [07:09:56.361] [bbotk] Result of batch 5:
+## INFO  [07:09:56.364] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
+## INFO  [07:09:56.364] [bbotk]       1000   11             2   0.7549846        0      0          420.097
+## INFO  [07:09:56.364] [bbotk]                                 uhash
+## INFO  [07:09:56.364] [bbotk]  20ce8cb7-5531-422c-8987-69d6c88aa186
+## INFO  [07:09:56.368] [bbotk] Evaluating 1 configuration(s)
+## INFO  [07:09:56.378] [mlr3] Running benchmark with 3 resampling iterations
+## INFO  [07:10:00.116] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
+## INFO  [07:10:10.156] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
+## INFO  [07:10:22.904] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
+## INFO  [07:11:24.907] [mlr3] Finished benchmark
+## INFO  [07:11:24.951] [bbotk] Result of batch 6:
+## INFO  [07:11:24.955] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
+## INFO  [07:11:24.955] [bbotk]        500   11            40    0.758176        0      0          188.752
+## INFO  [07:11:24.955] [bbotk]                                 uhash
+## INFO  [07:11:24.955] [bbotk]  645c9ea7-56e5-49c9-816a-725341ada8f2
+## INFO  [07:11:24.958] [bbotk] Evaluating 1 configuration(s)
+## INFO  [07:11:24.969] [mlr3] Running benchmark with 3 resampling iterations
+## INFO  [07:11:28.944] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
+## INFO  [07:11:38.704] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
+## INFO  [07:11:53.768] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
+## INFO  [07:12:10.582] [mlr3] Finished benchmark
+## INFO  [07:12:10.628] [bbotk] Result of batch 7:
+## INFO  [07:12:10.632] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
+## INFO  [07:12:10.632] [bbotk]        500    1             2   0.7019438        0      0           50.211
+## INFO  [07:12:10.632] [bbotk]                                 uhash
+## INFO  [07:12:10.632] [bbotk]  9d86d3f5-984f-4c85-ae8c-ac4a52045156
+## INFO  [07:12:10.635] [bbotk] Evaluating 1 configuration(s)
+## INFO  [07:12:10.647] [mlr3] Running benchmark with 3 resampling iterations
+## INFO  [07:12:15.176] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 1/3)
+## INFO  [07:12:28.446] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 2/3)
+## INFO  [07:12:43.596] [mlr3] Applying learner &#39;surv.ranger&#39; on task &#39;surv_example&#39; (iter 3/3)
+## INFO  [07:12:59.223] [mlr3] Finished benchmark
+## INFO  [07:12:59.269] [bbotk] Result of batch 8:
+## INFO  [07:12:59.272] [bbotk]  num.trees mtry min.node.size surv.cindex warnings errors runtime_learners
+## INFO  [07:12:59.272] [bbotk]        500    1            40   0.6946753        0      0           45.574
+## INFO  [07:12:59.272] [bbotk]                                 uhash
+## INFO  [07:12:59.272] [bbotk]  406a6368-7ea8-4bee-928b-027ebdeb23b1
+## INFO  [07:12:59.292] [bbotk] Finished optimizing after 8 evaluation(s)
+## INFO  [07:12:59.293] [bbotk] Result:
+## INFO  [07:12:59.296] [bbotk]  num.trees  mtry min.node.size learner_param_vals  x_domain surv.cindex
+## INFO  [07:12:59.296] [bbotk]      &lt;int&gt; &lt;int&gt;         &lt;int&gt;             &lt;list&gt;    &lt;list&gt;       &lt;num&gt;
+## INFO  [07:12:59.296] [bbotk]        500    11            40          &lt;list[7]&gt; &lt;list[3]&gt;    0.758176</code></pre>
 <pre><code>##    num.trees  mtry min.node.size learner_param_vals  x_domain surv.cindex
 ##        &lt;int&gt; &lt;int&gt;         &lt;int&gt;             &lt;list&gt;    &lt;list&gt;       &lt;num&gt;
 ## 1:       500    11            40          &lt;list[7]&gt; &lt;list[3]&gt;    0.758176</code></pre>
@@ -6202,11 +6105,7 @@ tuner$optimize(instance)</code></pre>
 foreach::registerDoSEQ()
 
 tictoc::toc()</code></pre>
-<<<<<<< HEAD:demo_ML_survivalRF.html
-<pre><code>## 799.081 sec elapsed</code></pre>
-=======
-<pre><code>## 806.051 sec elapsed</code></pre>
->>>>>>> 70bd36760b09e2b951b8ea987dfdfdf38d47ebe3:demo.html
+<pre><code>## 813.294 sec elapsed</code></pre>
 <pre class="r"><code>#Uncomment next line to save the tuning
 qs::qsave(instance, here::here(&quot;ML&quot;, &quot;htune_demo.qs&quot;))</code></pre>
 </div>
@@ -6789,7 +6688,7 @@ preds &lt;-
   ranger:::predict.ranger(rf_model, data = data_sets)$survival %&gt;%
   tibble::as_tibble() %&gt;%
   dplyr::select(all_of(time_points))</code></pre>
-<pre><code>## Aggregating predictions.. Progress: 88%. Estimated remaining time: 4 seconds.</code></pre>
+<pre><code>## Aggregating predictions.. Progress: 85%. Estimated remaining time: 5 seconds.</code></pre>
 <pre class="r"><code>#merge predictions with data set and calculate 2D PDPs (average (survival probability) for each feature combination value per timepoint)
 pdp_data  &lt;- data_sets %&gt;% bind_cols(preds) %&gt;%
   filter(bm05 %in% bm05_grid) %&gt;%
